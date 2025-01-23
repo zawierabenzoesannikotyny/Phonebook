@@ -29,5 +29,14 @@ def delete_contact(id):
     return redirect(url_for('index'))
 
 
+@app.route('/search', methods=['GET'])
+def search():
+    query = request.args.get('query')
+    results = Contact.query.filter(
+        (Contact.name.ilike(f'%{query}%')) | (Contact.phone.ilike(f'%{query}%'))
+    ).all()
+    return render_template('index.html', contacts=results)
+
+
 if __name__ == '__main__':
     app.run(debug=True)
