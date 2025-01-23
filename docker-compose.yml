@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:latest
+    container_name: phonebook-db
+    environment:
+      POSTGRES_USER: phonebook_user
+      POSTGRES_PASSWORD: phonebook_password
+      POSTGRES_DB: phonebook
+    ports:
+      - "5432:5432"
+    volumes:
+      - phonebook_data:/var/lib/postgresql/data
+
+volumes:
+  phonebook_data:
